@@ -6,6 +6,8 @@ output: html_document
 ---
 ```{r}
 library(tidyverse)
+library(janitor)
+library(ggplot2)
 ```
 
 
@@ -18,5 +20,32 @@ nrow(mob)
 ```
 ```{r}
 ncol(mob)
+```
+
+```{r}
+mob %>% 
+  count(Newspaper) %>% 
+  arrange(desc(n)) %>% 
+top_n(15,n)
+
+```
+
+```{r}
+mob %>% 
+count(keyword) %>% 
+arrange(desc(n))
+```
+```{r}
+mob %>% 
+count(Year) %>% 
+arrange(desc(n))
+```
+
+```{r}
+Years<-mob %>% 
+  count(Year) %>% 
+arrange(desc(n))
+ggplot(data=Years) +
+  geom_col(mapping=aes(x=Year, y=n)) 
 ```
 
